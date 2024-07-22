@@ -1,0 +1,78 @@
+﻿
+@model IEnumerable<ProductCategories.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    @if (Model != null)
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CreatedDate" class="btn btn-warning">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ModifiedDate" class="btn btn-info">Details</a> |
+                        <input type="checkbox" @(item.IsActive ? "checked" : "") disabled />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <p>No categories found.</p>
+    }
+</table>
+
+@section Scripts {
+    <script>
+        function showCreateForm() {
+            document.getElementById('createForm').style.display = 'block';
+        }
+
+        function hideCreateForm() {
+            document.getElementById('createForm').style.display = 'none';
+        }
+
+        document.getElementById('createCategoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('Name').value;
+            const isActive = document.getElementById('IsActive').checked;
+
+            fetch('/api/categories', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Name: name, IsActive: isActive })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Category created successfully!');
+                    location.reload(); // Reload the page to see the new category
+                } else {
+                    alert('Error creating category.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error creating category.');
+            });
+        });
+    </script>
+}
