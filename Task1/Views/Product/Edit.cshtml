@@ -1,0 +1,99 @@
+﻿@model ProductCategories.Models.ViewModel.EditProduct
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update Product</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .card {
+            max-width: 500px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .form-control {
+            border-radius: 20px;
+        }
+
+        .form-check-input {
+            margin-top: 0.3rem;
+        }
+
+        .btn-update {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-update:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-cancel:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+    </style>
+</head>
+<body>
+    <div class="card shadow">
+        <div class="card-header">
+            <h3>Update Product</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" id="name" class="form-control" asp-for="Name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Product Price</label>
+                    <input type="text" id="name" class="form-control" asp-for="Price" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Product Quantity</label>
+                    <input type="text" id="name" class="form-control" asp-for="Quantity" />
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" id="isActive" class="form-check-input" asp-for="IsActive" />
+                        <label class="form-check-label" for="isActive">Is Active</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-update btn-block">Update</button>
+                        <a href="/" class="btn btn-cancel btn-block mt-2">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

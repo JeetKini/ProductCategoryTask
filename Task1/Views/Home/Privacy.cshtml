@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Product";
+}
+@model IEnumerable<ProductCategories.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Product</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    @if (Model != null)
+    {
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Quantity" class="btn btn-warning">Quantity</a> |
+                        <a asp-action="Details" asp-route-id="@item.CreatedDate" class="btn btn-info">CreateDate</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Price" class="btn btn-danger">Price</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <p>No categories found.</p>
+    }
+
+   
+</table>
+

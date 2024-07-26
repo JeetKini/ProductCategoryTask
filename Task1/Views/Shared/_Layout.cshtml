@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProductCategories</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProductCategories.styles.css" asp-append-version="true" />
+    <style>
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 50px 0;
+        }
+
+            .hero h1 {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            }
+
+        .card-custom {
+            transition: transform 0.2s;
+        }
+
+            .card-custom:hover {
+                transform: scale(1.05);
+            }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProductCategories</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Product">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="GetCategories">Category</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero text-center">
+        <h1 class="display-4">Welcome To My Product_Category Website</h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core" class="text-white font-weight-bold">building Web apps with ASP.NET Core</a>.</p>
+        <a class="btn btn-secondary btn-lg m-2"  asp-area="" asp-controller="Product" asp-action="AddProd">Add Product</a>
+        <a class="btn btn-secondary btn-lg m-2" asp-area="" asp-controller="Category" asp-action="AddCat">Add Category</a>
+    </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="~/lib/bootstrap/dist/css/prod.jpg" class="card-img-top" alt="Products">
+                        <div class="card-body">
+                            <h5 class="card-title">Products</h5>
+                            <p class="card-text">Explore a wide range of products available on our platform.</p>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="GetProduct">View Products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="~/lib/bootstrap/dist/css/ci.jpg" class="card-img-top" alt="Categories">
+                        <div class="card-body">
+                            <h5 class="card-title">Categories</h5>
+                            <p class="card-text">Browse through various categories to find products that suit your needs.</p>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Category" asp-action="GetCategories">View Category</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="~/lib/bootstrap/dist/css/LearnMoreIMG.jpg" class="card-img-top" alt="Technology">
+                        <div class="card-body">
+                            <h5 class="card-title">About Us</h5>
+                            <p class="card-text">Learn more about our mission and values in building this platform.</p>
+                            <a href="/about" class="btn btn-info">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - ProductCategories - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function fetchCategories() {
+            fetch('https://localhost:7295/api/category')
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error fetching categories:', error));
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
